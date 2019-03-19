@@ -4,7 +4,7 @@
   "description": "De/serialize JavaScript objects with all references preserved - even circular ones",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/r-flash/js-serialize-structure/issues"
   },
-  "homepage": "https://github.com/r-flash/js-serialize-structure#readme"
+  "homepage": "https://github.com/r-flash/js-serialize-structure#readme",
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  }
 }
