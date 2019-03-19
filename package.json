@@ -1,0 +1,27 @@
+{
+  "name": "stringify-structure",
+  "version": "0.0.1",
+  "description": "De/serialize JavaScript objects with all references preserved - even circular ones",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-flash/js-serialize-structure.git"
+  },
+  "keywords": [
+    "serialize",
+    "deserialize",
+    "stringify"
+  ],
+  "author": {
+    "name": "Adam Platkevič",
+    "email": "rflashster@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r-flash/js-serialize-structure/issues"
+  },
+  "homepage": "https://github.com/r-flash/js-serialize-structure#readme"
+}
