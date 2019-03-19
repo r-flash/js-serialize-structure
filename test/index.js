@@ -74,6 +74,7 @@ it('should handle NaN, Infinity and undefined', function () {
     const dized = Ser.deserialize(sized);
 
     assert.deepStrictEqual(dized, obj);
+    assert(dized.hasOwnProperty("undefined"));
 });
 
 it('should handle symbols as values', function () {
