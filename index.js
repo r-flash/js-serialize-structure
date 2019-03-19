@@ -9,6 +9,7 @@ function isStrictlyNaN(val) {
 
 exports.serialize = function serialize(obj) {
     const indexMap = new Map();
+    let symbolIndex = 0;
     const output = [];
 
     function getIndex(val) {
@@ -16,7 +17,12 @@ exports.serialize = function serialize(obj) {
         if (indexMap.has(val)) return indexMap.get(val);
 
         // handle non-JSON.stringify-able primitive values
-        if (typeof val === "symbol") return "_" + (Symbol.keyFor(val) || "");
+        if (typeof val === "symbol") {
+            const key = Symbol.keyFor(val);
+            const index = key ? "_" + key : "#" + (symbolIndex++);
+            indexMap.set(val, index);
+            return index;
+        }
         if (isStrictlyNaN(val)) return VALUE_NAN;
         if (val === Infinity) return VALUE_INFTY;
         if (val === -Infinity) return VALUE_NEG_INFTY;
@@ -59,7 +65,11 @@ exports.deserialize = function deserialize(str) {
         if (valueMap.has(index)) return valueMap.get(index);
 
         // handle pseudo-indices of non-JSON.stringify-able primitive values
-        if (typeof index === "string") return index.length > 1 ? Symbol.for(index.substr(1)) : Symbol();
+        if (typeof index === "string") {
+            const symbol = index[0] === "#" ? Symbol() : Symbol.for(index.substr(1));
+            valueMap.set(index, symbol);
+            return symbol;
+        }
         if (index === VALUE_NAN) return NaN;
         if (index === VALUE_INFTY) return Infinity;
         if (index === VALUE_NEG_INFTY) return -Infinity;
