@@ -55,31 +55,5 @@ typeof dized.sym1 === "symbol"; // true
 dized.sym2 === Symbol.for("key"); // true
 ```
 
-## Idea
-The implemented idea is simple: when serializing, make a list of all unique values and replace all their occurences
-in the original structure with their indices.
-
-```js
-const nested = {
-    foo: "baz"
-};
-
-const obj = {
-    foo: "bar",
-    nested1: nested,
-    nested2: nested
-};
-obj.obj = obj;
-
-// ...turns into something like:
-
-[{ foo: 1, nested1: 2, nested2: 2 }, "bar", { foo: 3 }, "baz"]
-
-```
-
-`NaN`s and other problematic values are just replaced with placeholders. This structure is then safely
-`JSON.stringify`-ed. Deserialization just `JSON.parse`s the input and recursively replaces the numbers with values 
-from the list, memoizing those already produced.
-
 ## License
 MIT
