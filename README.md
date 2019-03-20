@@ -34,25 +34,25 @@ const obj = {
 
 obj.obj = obj; // circular reference
 
-const sized = Ser.serialize(obj);
-const dized = Ser.deserialize(sized);
+const serialized = Ser.serialize(obj);
+const deserialized = Ser.deserialize(serialized);
 
 //======================================
 
-dized.foo; // "bar"
+deserialized.foo; // "bar"
 
-isNaN(dized.nan); // true
+isNaN(deserialized.nan); // true
 
-dized.undef === undefined; // true
-dized.hasOwnProperty("undefined"); // true
+deserialized.undef === undefined; // true
+deserialized.hasOwnProperty("undefined"); // true
 
-obj.obj = obj; // true
+deserialized.obj === deserialized; // true
 
-obj.nested1 === obj.nested2; // true
+deserialized.nested1 === deserialized.nested2; // true
 
-typeof dized.sym1 === "symbol"; // true
+typeof deserialized.sym1 === "symbol"; // true
 
-dized.sym2 === Symbol.for("key"); // true
+deserialized.sym2 === Symbol.for("key"); // true
 ```
 
 ## License
